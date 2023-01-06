@@ -73,7 +73,7 @@ class Ehh extends Importable {
         if (this.userConfig.env.toUpperCase() == "NODE") {
           component = await import(this.path + componentList[componentKey]);
         } else {
-          component = await import(componentList[componentKey]);
+          component = await import(this.userConfig.host + componentList[componentKey]);
         }
         this.Components[componentKey] = component;
       }
