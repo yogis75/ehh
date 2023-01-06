@@ -3,7 +3,7 @@ const clientConfig = {
     imports: {
       pre: {},
       post: {
-        Router: "/node_modules/ehh/core/router.js",
+        Router: "../router.js",
       },
     },
   },
