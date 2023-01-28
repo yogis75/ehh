@@ -1,34 +1,56 @@
 class Router {
   constructor() {
     this.routes = [];
-    this.root = "index.html"
+    this.root = "index.html";
   }
 
-  start(){
+  start() {
     if (typeof window != "undefined") {
       window.onload = () => {
         console.log("onLoad");
         window.location = this.root;
         this.resolveEvent();
       };
-      this.resolveEvent()
+      this.resolveEvent();
     }
   }
-  setHomePage(root){
-    this.root = root
+  setHomePage(root) {
+    this.root = root;
   }
   addRoute(entity) {
     this.routes.push(entity);
   }
+
   async resolveEvent(event) {
+    // this.currentRoute = window.location.hash.slice(1);
+    // this.queryParams = this.getQueryParams();
+    // console.log(this.currentRoute, this.queryParams);
+    let arr = window.location.hash.split("?");
     let { hash } = window.location;
-    if(window.location.pathname == "/" && window.location.hash == ""){
+    let hashArr = hash.split("?");
+    hash = hashArr[0];
+    if (window.location.pathname == "/" && hash == "") {
       hash = this.root;
+    }
+
+    let search = hashArr[1] || null;
+    let params;
+    if (search) {
+      params = JSON.parse(
+        '{"' +
+          decodeURI(search)
+            .replace(/"/g, '\\"')
+            .replace(/&/g, '","')
+            .replace(/=/g, '":"') +
+          '"}'
+      );
     }
 
     const route = this.routes.find((route) => {
       return hash.match(new RegExp(route.path));
     });
+
+    console.log(route);
     if (route) {
       console.log(route);
       let callback = route.controller.callback;
@@ -36,11 +58,12 @@ class Router {
         event,
         route.view,
         route.model,
-        route.controller.callback
+        route.controller.callback,
+        params
       );
     } else {
       // redirectiing t home page
-      window.location = "/" + this.root
+      // window.location = "/" + this.root;
     }
   }
 
