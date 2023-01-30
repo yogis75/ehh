@@ -34,17 +34,18 @@ class Router {
     }
 
     let search = hashArr[1] || null;
-    let params;
-    if (search) {
-      params = JSON.parse(
-        '{"' +
-          decodeURI(search)
-            .replace(/"/g, '\\"')
-            .replace(/&/g, '","')
-            .replace(/=/g, '":"') +
-          '"}'
-      );
-    }
+    let params = search;
+    console.log(params);
+    // if (search) {
+    //   params = JSON.parse(
+    //     '{"' +
+    //       decodeURI(search)
+    //         .replace(/"/g, '\\"')
+    //         .replace(/&/g, '","')
+    //         .replace(/=/g, '":"') +
+    //       '"}' 7036969090
+    //   );
+    // }
 
     const route = this.routes.find((route) => {
       return hash.match(new RegExp(route.path));
