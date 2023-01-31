@@ -35,7 +35,7 @@ class Router {
 
     let search = hashArr[1] || null;
     let params = search;
-    console.log(params);
+    // console.log(params);
     // if (search) {
     //   params = JSON.parse(
     //     '{"' +
@@ -51,9 +51,9 @@ class Router {
       return hash.match(new RegExp(route.path));
     });
 
-    console.log(route);
+    // console.log(route);
     if (route) {
-      console.log(route);
+      // console.log(route);
       let callback = route.controller.callback;
       let res = await callback(
         event,
