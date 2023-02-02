@@ -34,7 +34,7 @@ class Router {
     }
 
     let search = hashArr[1] || null;
-    let params = search;
+    let params = hashArr;
     // console.log(params);
     // if (search) {
     //   params = JSON.parse(
@@ -43,7 +43,7 @@ class Router {
     //         .replace(/"/g, '\\"')
     //         .replace(/&/g, '","')
     //         .replace(/=/g, '":"') +
-    //       '"}' 7036969090
+    //       '"}'
     //   );
     // }
 
